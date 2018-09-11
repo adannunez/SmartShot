@@ -9,7 +9,7 @@ import kotlin.concurrent.scheduleAtFixedRate
 
 class MainActivity : AppCompatActivity() {
     private val logger = Logger.getLogger("MainActivity")
-    lateinit var newShotTask: TimerTask
+    private lateinit var newShotTask: TimerTask
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
