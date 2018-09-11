@@ -9,14 +9,17 @@ import kotlin.concurrent.scheduleAtFixedRate
 
 class MainActivity : AppCompatActivity() {
     private val logger = Logger.getLogger("MainActivity")
+    lateinit var newShotTask: TimerTask
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
+    override fun onStart() {
+        super.onStart()
         val shotCallView = findViewById<TextView>(R.id.ShotCall)
-
-        Timer().scheduleAtFixedRate(
+        newShotTask = Timer().scheduleAtFixedRate(
                 delay = 1000,
                 period = 3000,
                 action = {
@@ -29,5 +32,10 @@ class MainActivity : AppCompatActivity() {
                     shotCallView.text = newValue.toString()
                 }
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        newShotTask.cancel()
     }
 }
