@@ -1,4 +1,15 @@
 <resources>
-    <string name="app_name">SmartShost</string>
+    <string name="app_name">SmartShot</string>
     <string name="shotCall">Shot Call</string>
+    <string name="title_activity_main_bottom_nav">MainBottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_shoot">Shoot</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shot_delay">Shot Delay:</string>
+    <string name="number_of_targets">Number of Targets:</string>
+    <string name="shot_delay_hint">Seconds between shots</string>
 </resources>
