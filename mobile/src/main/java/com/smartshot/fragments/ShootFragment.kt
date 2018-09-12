@@ -3,6 +3,8 @@ package com.smartshot.fragments
 import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +35,14 @@ class ShootFragment : Fragment() {
 
     private lateinit var shootingViewModel: ShootingViewModel
     private var newShotTask: TimerTask? = null
+
+    private val targetHandler = Handler { message ->
+        val shotCallView = view!!.findViewById<TextView>(R.id.ShotCall)
+        logger.info("Setting value to ${message.arg1}")
+        shotCallView.text = message.arg1.toString()
+        return@Handler true
+    }
+
     private val logger = Logger.getLogger("ShootFragment")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +73,14 @@ class ShootFragment : Fragment() {
                 delay = 1000,
                 period = (delaySeconds * 1000).toLong(),
                 action = {
-                    val oldValue = shotCallView.text
+                    val oldValue = shotCallView.text.toString().toIntOrNull()
                     var newValue = oldValue
                     while (oldValue == newValue) {
-                        newValue = (Random().nextInt(targetCount)+1).toString()
+                        newValue = (Random().nextInt(targetCount)+1)
                     }
-                    logger.info("Setting value to $newValue")
-                    shotCallView.text = newValue.toString()
+                    val message = Message()
+                    message.arg1 = newValue!!
+                    targetHandler.sendMessage(message)
                 }
         )
 
